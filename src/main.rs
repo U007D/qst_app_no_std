@@ -1,24 +1,41 @@
-#![warn(clippy::all)]
-#![allow(unsafe_code)] // Do not remove!  Explicitly change to #![allow(unsafe_code)] to use `unsafe` keyword.
-#![forbid(overflowing_literals)]
-//#![deny(warnings)]
-//#![deny(missing_docs)]
-// Uncomment before ship to reconcile use of possibly redundant crates and uncover possible debug remnants
-//#![warn(clippy::multiple_crate_versions, clippy::print_stdout, clippy::unimplemented, clippy::use_debug)]
-// vvv Safety-critical application lints (pedantic: use for safety-critical applications only) vvv
-#![deny(clippy::cast_possible_truncation, clippy::cast_possible_wrap, clippy::cast_precision_loss,
-clippy::cast_sign_loss, clippy::float_cmp_const, clippy::indexing_slicing, clippy::integer_arithmetic,
-clippy::maybe_infinite_iter, clippy::option_unwrap_used, clippy::result_unwrap_used)]
-// ^^^ End of safety-critical lint section ^^^
-#![allow(clippy::match_bool,)]
-#![no_main]
+#![warn(clippy::all, clippy::nursery, clippy::pedantic, rust_2018_idioms)]
+// To use the `unsafe` keyword, do not remove the `unsafe_code` attribute entirely.
+// Instead, change it to `#![deny(unsafe_code)]` + opt-in with locally-justified in comments
+// `#[allow(unsafe_code)]`'s on a case-by-case basis.
+#![deny(unsafe_code)]
+// Safety-critical application lints
+#![forbid(bare_trait_objects, overflowing_literals)]
+#![deny(
+    clippy::pedantic,
+    clippy::float_cmp_const,
+    clippy::indexing_slicing,
+    clippy::integer_arithmetic,
+    clippy::unwrap_used
+)]
+#![allow(
+    clippy::implicit_return,
+    clippy::iter_nth_zero,
+    clippy::match_bool,
+    clippy::missing_errors_doc,
+    clippy::module_name_repetitions,
+    clippy::semicolon_if_nothing_returned,
+    clippy::wildcard_imports
+)]
+// Uncomment before ship to reconcile use of possibly redundant crates, debug remnants, missing
+// license files and more
+// #![warn(clippy::cargo, clippy::restriction, missing_docs, warnings)]
+// #![allow(clippy::blanket_clippy_restriction_lints, clippy::implicit_return)]
+
 #![no_std]
-use {
-    consts::*,
-    error::Error,
-};
+#![no_main]
 
-mod consts;
-mod error;
-pub mod handler;
+mod handler;
 
+// `#[no_mangle]` is unsafe but is required to be able to call appication entry point
+#[allow(unsafe_code)]
+#[no_mangle]
+#[allow(clippy::missing_const_for_fn)]
+fn main() -> ! {
+    #[allow(clippy::empty_loop)]
+    loop {}
+}

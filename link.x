@@ -1,5 +1,5 @@
 /* Memory layout of the LM3S6965 microcontroller */
-/* 1K = 1 KiBi = 1024 bytes */
+/* Note: K = KiB = 1024 bytes, etc. */
 MEMORY
 {
   FLASH : ORIGIN = 0x00000000, LENGTH = 256K

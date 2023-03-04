@@ -4,10 +4,8 @@ version = "0.1.0"
 authors = ["{{authors}}"]
 edition = "2021"
 
-[build]
-target = "thumbv7m-none-eabi"
-
 [dependencies]
+bool_ext = { version = "*", default-features = false }
 
 [profile.dev]
 codegen-units = 1
