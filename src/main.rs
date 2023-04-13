@@ -35,7 +35,7 @@ mod handler;
 #[allow(unsafe_code)]
 #[no_mangle]
 #[allow(clippy::missing_const_for_fn)]
-fn main() -> ! {
+extern "C" fn main() -> ! {
     #[allow(clippy::empty_loop)]
     loop {}
 }
