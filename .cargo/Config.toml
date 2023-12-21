@@ -1,6 +1,6 @@
 [build]
-rustc-wrapper = "/Users/sergibli/.cargo/bin/clippy-driver"
-target = "riscv64gc-unknown-none-elf"
+rustc-wrapper = "/Users/brad/.cargo/bin/clippy-driver"
+target = "aarch64-unknown-none"
 
 [env]
 CLIPPY_TESTS = "true"
@@ -9,5 +9,5 @@ CLIPPY_TESTS = "true"
 git-fetch-with-cli = true
 
 [target.riscv64gc-unknown-none-elf]
-runner = "riscv64-unknown-elf-gdb"
+runner = "aarch64-unknown-none-gdb"
 rustflags = ["-C", "link-arg=-Tlink.x"]
