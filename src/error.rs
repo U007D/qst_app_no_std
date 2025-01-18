@@ -1,14 +1,13 @@
 pub mod io;
 
-use crate::shared_consts::*;
+use crate::shared_const::*;
 use thiserror::Error;
 
 #[allow(dead_code)]
 pub type Result<T, E = Error> = core::result::Result<T, E>;
 
-#[allow(clippy::derive_partial_eq_without_eq)]
-#[derive(Clone, Debug, Error, PartialEq)]
+#[derive(Debug, Error)]
 pub enum Error {
-    #[error("{}: {}: ", msg::ERR_IO, 0)]
-    IoError(#[from] io::Error),
+    #[error("Whoops!")]
+    SampleVariant,
 }
